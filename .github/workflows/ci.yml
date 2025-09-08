@@ -45,5 +45,5 @@ jobs:
     - name: jacoco-reporter
       uses: PavanMudigonda/jacoco-reporter@v5.0
       with:
-        coverage_results_path: /home/runner/work/DevOpsDemo/DevOpsDemo/target/jacoco.xml
+        coverage_results_path: target/site/jacoco/jacoco.xml
             
