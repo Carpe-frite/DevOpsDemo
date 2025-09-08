@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v4.6.2
       with:
         name: artifact
-        path: artifact.jar
+        path: /home/runner/work/DevOpsDemo/DevOpsDemo/target/demo-0.0.1-SNAPSHOT.jar.original
         if-no-files-found: warn  
         retention-days: 1
         compression-level: 4
