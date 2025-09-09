@@ -22,4 +22,4 @@ jobs:
       - uses: HormCodes/do-not-deploy-on-friday@v1
         # See Inputs section below...
         with:
-          timezone: Europe/Prague
+          timezone: Europe/Paris
