@@ -55,8 +55,28 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package -DskipTests --file pom.xml
+        
+   # - name: Build with Maven
+   #   run: mvn -B package -DskipTests --file pom.xml
+
+    - name: Cache SonarQube packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+        
+    - name: Cache Maven packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Build and analyze (with SONAR!!!)
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Carpe-frite_DevOpsDemo
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
@@ -67,10 +87,4 @@ jobs:
         retention-days: 1
         compression-level: 4
         overwrite: false  
-        include-hidden-files: false
-
-    - name: Build and analyze
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Carpe-frite_DevOpsDemo
-            
+        include-hidden-files: false           
