@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<sonar.organization>carpe-frite</sonar.organization>
 	</properties>
 	<dependencies>
 		<dependency>
